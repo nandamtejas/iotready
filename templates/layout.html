@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>IoTReady</title>
+</head>
+<body>
+    <nav>
+        <div class="navbar">
+            <!-- {{title_name|default("IoTReady")}} -->
+            IoTReady
+        </div>
+    </nav>
+    <div class="page">
+        <main>
+        <div class="main bg-light bg-gradient" style="--bs-bg-opacity: 0.25;">
+            <div class="service"> 
+                <form class="row g-3">
+                    <div class="col-md-6">
+                      <label for="hub" class="form-label required" aria-required="true">Hub</label>
+                      <input type="text" class="form-control" id="hub" value={{hub}} required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="gsn" class="form-label">GSN</label>
+                      <input type="text" class="form-control" id="gsn">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="supplier" class="form-label required" aria-required="true">Supplier</label>
+                        <input type="text" class="form-control" id="supplier" value={{supplier}} required>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <label for="inputAddress" class="form-label">Address</label> -->
+                        <!-- <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"> -->
+                    </div>
+                    <div class="col-md-6">
+                        <label for="supplier_name" class="form-label">Supplier Name</label>
+                        <input type="text" class="form-control" value={{supplier_name}} id="supplier_name">
+                    </div>
+                </form>
+            </div>
+            <div class="sku">
+                <h3>SKU Summary</h3>
+                <p>SKU Table</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" name="checkbox-for-No" disabled>
+                                <label for="checkbox-for-No">No.</label>
+                            </th>
+                            <th>SKU</th>
+                            <th>SKU Description</th>
+                            <th>Standard Crate Quantity</th>
+                            <th>Procured Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sku in sku_table %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkbox-for-{{sku.idx}}" disabled>
+                                    <label for="checkbox-for-{{sku.idx}}">{{sku.idx}}</label>
+                                </td>
+                                <td> {{sku.sku}} </td>
+                                <td> {{sku.sku_description}} </td>
+                                <td> {{sku.standard_crate_quantity}} </td>
+                                <td> {{sku.quantity}} </td>
+                            </tr>
+                        {% endfor %}
+                        <!-- <tr>
+                            <td>
+                                <input type="radio" name="radio-for-1" disabled>
+                                <label for="radio-for-1">1</label>
+                            </td>
+                            <td>10000298</td>
+                            <td>Mango Banganapalli 1 Kg</td>
+                            <td>18000</td>
+                            <td>36190</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="accordion crate" id="accordionExample">
+                <div class="accordion-item" style="border: none;">
+                  <h3 class="accordion-header" id="headingOne">
+                    <button style="background: none; color: black;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <h3>Crate List</h3>
+                    </button>
+                  </h3>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Crate Table</p>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="checckbox-for-No">
+                                        <label for="checckbox-for-No">No.</label>
+                                    </th>
+                                    <th>Crate</th>
+                                    <th>SKU</th>
+                                    <th>Packed Quality</th>
+                                    <th>Crate Weight</th>
+                                    <th>Is Final Crate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for crate in crate_table %}
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="checkbox-for-{{crate.idx}}">
+                                            <label for="checkbox-for-{{crate.idx}}"> {{crate.idx}} </label>
+                                        </td>
+                                        <td> {{crate.crate}} </td>
+                                        <td> {{crate.sku}} </td>
+                                        <td> {{crate.packed_quantity}} </td>
+                                        <td> {{crate.crate_weight}} </td>
+                                        <td> {{crate.is_final_crate}} </td>
+                                    </tr>
+                                {% endfor %}
+                                <!-- <tr>
+                                    <td>
+                                        <input type="checkbox" name="checckbox-for-1">
+                                        <label for="checckbox-for-1">1</label>
+                                    </td>
+                                    <td>3e410b75b4</td>
+                                    <td>1000298</td>
+                                    <td>18100</td>
+                                    <td>18100</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="checckbox-for-2">
+                                        <label for="checckbox-for-2">2</label>
+                                    </td>
+                                    <td>7c2eba029c</td>
+                                    <td>1000298</td>
+                                    <td>18090</td>
+                                    <td>18090</td>
+                                    <td>0</td>
+                                </tr> -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>
